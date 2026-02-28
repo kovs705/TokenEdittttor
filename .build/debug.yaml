@@ -1,0 +1,112 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "PackageStructure": ["<PackageStructure>"]
+  "TokenEditttor-arm64-apple-macosx26.0-debug.module": ["<TokenEditttor-arm64-apple-macosx26.0-debug.module>"]
+  "TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.module": ["<TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.module>"]
+  "TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.test": ["<TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.test>"]
+  "TokenEditttorTests-arm64-apple-macosx26.0-debug.module": ["<TokenEditttorTests-arm64-apple-macosx26.0-debug.module>"]
+  "main": ["<TokenEditttor-arm64-apple-macosx26.0-debug.module>"]
+  "test": ["<TokenEditttor-arm64-apple-macosx26.0-debug.module>","<TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.test>","<TokenEditttorTests-arm64-apple-macosx26.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/kovs705/Documents/TokenEdittttor/Tests/TokenEditttorTests/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+commands:
+  "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITextEditor.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITextEditorStyle.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITokenTextView.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITokenTextViewStyle.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/TokenRingView.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/Tokenization.swift"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/sources"]
+    description: "Write auxiliary file /Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/sources"
+
+  "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.derived/runner.swift"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/sources"]
+    description: "Write auxiliary file /Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/sources"
+
+  "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.derived/runner.swift":
+    tool: test-entry-point-tool
+    inputs: []
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.derived/runner.swift"]
+
+  "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/runner.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/TokenizationTests.swift.o"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.product/Objects.LinkFileList"
+
+  "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/kovs705/Documents/TokenEdittttor/Tests/TokenEditttorTests/TokenizationTests.swift"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/sources"]
+    description: "Write auxiliary file /Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/sources"
+
+  "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<TokenEditttor-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttor.swiftmodule"]
+    outputs: ["<TokenEditttor-arm64-apple-macosx26.0-debug.module>"]
+
+  "<TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/runner.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorPackageTests.swiftmodule"]
+    outputs: ["<TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.module>"]
+
+  "<TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.test>":
+    tool: phony
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.xctest/Contents/MacOS/TokenEditttorPackageTests"]
+    outputs: ["<TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.test>"]
+
+  "<TokenEditttorTests-arm64-apple-macosx26.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/TokenizationTests.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorTests.swiftmodule"]
+    outputs: ["<TokenEditttorTests-arm64-apple-macosx26.0-debug.module>"]
+
+  "C.TokenEditttor-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITextEditor.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITextEditorStyle.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITokenTextView.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITokenTextViewStyle.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/TokenRingView.swift","/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/Tokenization.swift","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/sources"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttor.swiftmodule"]
+    description: "Compiling Swift Module 'TokenEditttor' (6 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","TokenEditttor","-emit-dependencies","-emit-module","-emit-module-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttor.swiftmodule","-output-file-map","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/sources","-I","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/include/TokenEditttor-Swift.h","-swift-version","6","-enable-experimental-feature","StrictConcurrency","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","tokenedittttor"]
+
+  "C.TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.derived/runner.swift","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorTests.swiftmodule","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/sources"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/runner.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorPackageTests.swiftmodule"]
+    description: "Compiling Swift Module 'TokenEditttorPackageTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","TokenEditttorPackageTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorPackageTests.swiftmodule","-output-file-map","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/sources","-I","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-Xfrontend","-enable-cross-import-overlays","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-emit-objc-header","-emit-objc-header-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/include/TokenEditttorPackageTests-Swift.h","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","tokenedittttor"]
+
+  "C.TokenEditttorPackageTests-arm64-apple-macosx26.0-debug.test":
+    tool: shell
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.build/runner.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/TokenizationTests.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.product/Objects.LinkFileList"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.xctest/Contents/MacOS/TokenEditttorPackageTests"]
+    description: "Linking ./.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.xctest/Contents/MacOS/TokenEditttorPackageTests"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug","-o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.xctest/Contents/MacOS/TokenEditttorPackageTests","-module-name","TokenEditttorPackageTests","-Xlinker","-no_warn_duplicate_libraries","-Xlinker","-bundle","-Xlinker","-rpath","-Xlinker","@loader_path/../../../","@/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorPackageTests.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx14.0","-Xlinker","-add_ast_path","-Xlinker","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttor.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorPackageTests.swiftmodule","-Xlinker","-add_ast_path","-Xlinker","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorTests.swiftmodule","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.TokenEditttorTests-arm64-apple-macosx26.0-debug.module":
+    tool: shell
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/Tests/TokenEditttorTests/TokenizationTests.swift","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttor.swiftmodule","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/sources"]
+    outputs: ["/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/TokenizationTests.swift.o","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorTests.swiftmodule"]
+    description: "Compiling Swift Module 'TokenEditttorTests' (1 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","TokenEditttorTests","-emit-dependencies","-emit-module","-emit-module-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules/TokenEditttorTests.swiftmodule","-output-file-map","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/output-file-map.json","-parse-as-library","-incremental","-c","@/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttorTests.build/sources","-I","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-Xfrontend","-enable-cross-import-overlays","-j10","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-parse-as-library","-swift-version","6","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","tokenedittttor"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/","/Users/kovs705/Documents/TokenEdittttor/Tests/TokenEditttorTests/","/Users/kovs705/Documents/TokenEdittttor/Package.swift","/Users/kovs705/Documents/TokenEdittttor/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

@@ -1,0 +1,47 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/master.swiftdeps"
+  },
+  "/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITextEditor.swift": {
+    "dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor.d",
+    "object": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor.swift.o",
+    "swiftmodule": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor~partial.swiftmodule",
+    "swift-dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor.swiftdeps",
+    "diagnostics": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditor.dia"
+  },
+  "/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITextEditorStyle.swift": {
+    "dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle.d",
+    "object": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle.swift.o",
+    "swiftmodule": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle~partial.swiftmodule",
+    "swift-dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle.swiftdeps",
+    "diagnostics": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITextEditorStyle.dia"
+  },
+  "/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITokenTextView.swift": {
+    "dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView.d",
+    "object": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView.swift.o",
+    "swiftmodule": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView.swiftdeps",
+    "diagnostics": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextView.dia"
+  },
+  "/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/AITokenTextViewStyle.swift": {
+    "dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle.d",
+    "object": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle.swift.o",
+    "swiftmodule": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle~partial.swiftmodule",
+    "swift-dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle.swiftdeps",
+    "diagnostics": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/AITokenTextViewStyle.dia"
+  },
+  "/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/TokenRingView.swift": {
+    "dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView.d",
+    "object": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView.swift.o",
+    "swiftmodule": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView.swiftdeps",
+    "diagnostics": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/TokenRingView.dia"
+  },
+  "/Users/kovs705/Documents/TokenEdittttor/Sources/TokenEditttor/Tokenization.swift": {
+    "dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization.d",
+    "object": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization.swift.o",
+    "swiftmodule": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization~partial.swiftmodule",
+    "swift-dependencies": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization.swiftdeps",
+    "diagnostics": "/Users/kovs705/Documents/TokenEdittttor/.build/arm64-apple-macosx/debug/TokenEditttor.build/Tokenization.dia"
+  }
+}
