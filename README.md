@@ -7,7 +7,8 @@ It gives you a text editor with a circular remaining-tokens indicator (similar t
 
 - SwiftUI component: `AITextEditor`
 - UIKit component: `AITokenTextView`
-- Token counting strategies: `.words`, `.characters`, `.approximateCharactersPerToken(Double)`
+- Word counting and AI token counting available together via `TokenMetrics`
+- Token counting strategies: `.words`, `.characters`, `.approximateCharactersPerToken(Double)`, `.openAIEncoding(...)`
 - Remaining-token ring with over-limit state
 - Chainable configuration APIs for styling and behavior
 
@@ -49,16 +50,31 @@ import TokenEditttor
 struct ComposeView: View {
     @State private var text = ""
     @State private var remainingRatio: Double = 1
+    @State private var tokenCount = 0
+    @State private var wordCount = 0
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
+            Text("Number of tokens: \(tokenCount)")
+                .font(.footnote.monospacedDigit())
+                .foregroundStyle(.secondary)
+
+            Text("Number of words: \(wordCount)")
+                .font(.footnote.monospacedDigit())
+                .foregroundStyle(.secondary)
+
             AITextEditor($text, $remainingRatio)
                 .placeholder("Write your message...")
                 .maxTokens(280)
-                .tokenizer(.words)
+                .tokenizer(.openAIEncoding(.cl100kBase))
+                .showsWordCountLabel(true)
                 .bold()
                 .backgroundColor(.blue.opacity(0.08), in: 16)
                 .ringColors(track: .gray.opacity(0.2), progress: .blue, overLimit: .red)
+                .onMetricsChange { metrics in
+                    tokenCount = metrics.tokenCount
+                    wordCount = metrics.wordCount
+                }
 
             Text("Remaining: \(Int(remainingRatio * 100))%")
                 .font(.footnote)
@@ -84,6 +100,8 @@ struct ComposeView: View {
 - `.ringColors(track: Color, progress: Color, overLimit: Color = .red)`
 - `.showTokenLabel(_ visible: Bool)`
 - `.showsRemainingLabel(_ visible: Bool)`
+- `.showsWordCountLabel(_ visible: Bool)`
+- `.onMetricsChange(_ action: @escaping (TokenMetrics) -> Void)`
 
 ## UIKit
 
@@ -107,7 +125,7 @@ final class ComposeViewController: UIViewController {
         editor
             .setPlaceholder("Write your message...")
             .setMaximumTokens(280)
-            .setTokenizer(.words)
+            .setTokenizer(.openAIEncoding(.cl100kBase))
             .bold()
             .setEditorBackgroundColor(.secondarySystemBackground, cornerRadius: 16)
             .setRingColors(track: .systemGray4, progress: .systemBlue, overLimit: .systemRed)
@@ -118,6 +136,14 @@ final class ComposeViewController: UIViewController {
 
         editor.onPercentageRemainingChange = { [weak self] ratio in
             self?.statusLabel.text = "Remaining: \(Int(ratio * 100))%"
+        }
+
+        editor.onTokenCountChange = { count in
+            print("Tokens: \(count)")
+        }
+
+        editor.onWordCountChange = { count in
+            print("Words: \(count)")
         }
 
         editor.translatesAutoresizingMaskIntoConstraints = false
@@ -158,6 +184,9 @@ Callbacks:
 
 - `onTextChange: ((String) -> Void)?`
 - `onPercentageRemainingChange: ((Double) -> Void)?`
+- `onTokenCountChange: ((Int) -> Void)?`
+- `onWordCountChange: ((Int) -> Void)?`
+- `onMetricsChange: ((TokenMetrics) -> Void)?`
 
 ## Tokenization
 
@@ -166,13 +195,28 @@ Callbacks:
 - `.words`: Uses `NaturalLanguage.NLTokenizer(unit: .word)`. Best default for natural language input.
 - `.characters`: Counts grapheme clusters (`String.count`).
 - `.approximateCharactersPerToken(Double)`: Useful when approximating model token usage by average chars/token.
+- `.openAIEncoding(OpenAITokenEncoding)`: Counts with OpenAI-compatible BPE tokenizer.
+
+`OpenAITokenEncoding` options:
+
+- `.cl100kBase`
+- `.p50kBase`
+- `.p50kEdit`
+- `.r50kBase`
+- `.gpt2`
 
 Example:
 
 ```swift
-let tokenizer: AITokenizer = .approximateCharactersPerToken(4.0)
-let used = tokenizer.count(in: "Hello world")
+let tokenizer: AITokenizer = .openAIEncoding(.cl100kBase)
+let used = await tokenizer.countAsync(in: "Hello world")
 ```
+
+Sync/async behavior:
+
+- For `.openAIEncoding`, use `countAsync(in:)`.
+- `countSync(in:)` returns `nil` for `.openAIEncoding`.
+- `count(in:)` is retained for backwards compatibility and returns `0` for `.openAIEncoding`.
 
 ## Shared Configuration Model
 
@@ -181,9 +225,10 @@ You can initialize with `AIEditorConfiguration`:
 ```swift
 let config = AIEditorConfiguration(
     maxTokens: 1000,
-    tokenizer: .words,
+    tokenizer: .openAIEncoding(.cl100kBase),
     placeholder: "Start typing",
-    showsRemainingLabel: true
+    showsRemainingLabel: true,
+    showsWordCountLabel: true
 )
 ```
 
@@ -206,6 +251,8 @@ let editor = AITokenTextView(configuration: config)
 - Minimum token limit is clamped to `1`.
 - `percentageRemaining` is clamped to `0...1`.
 - If text goes over limit, the remaining count becomes negative and the ring switches to over-limit color.
+- `.openAIEncoding` counts are async (`countAsync(in:)`).
+- First OpenAI-tokenizer use downloads vocab files and caches them, so first count can be slower.
 
 ## Running Tests
 

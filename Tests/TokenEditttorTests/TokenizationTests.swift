@@ -27,6 +27,24 @@ final class TokenEditttorTests: XCTestCase {
         XCTAssertEqual(count, 3)
     }
 
+    func testAsyncCountMatchesSyncForWordTokenizer() async {
+        let text = "one two three"
+        let syncCount = AITokenizer.words.count(in: text)
+        let asyncCount = await AITokenizer.words.countAsync(in: text)
+        XCTAssertEqual(syncCount, asyncCount)
+    }
+
+    func testTokenMetricsCalculationForWordsTokenizer() async {
+        let metrics = await TokenMetrics.calculate(
+            text: "hello world",
+            maxTokens: 10,
+            tokenizer: .words
+        )
+        XCTAssertEqual(metrics.wordCount, 2)
+        XCTAssertEqual(metrics.tokenCount, 2)
+        XCTAssertEqual(metrics.usage.remaining, 8)
+    }
+
     func testTokenUsageOverLimit() {
         let usage = TokenUsage(used: 120, maxTokens: 100)
         XCTAssertTrue(usage.isOverLimit)

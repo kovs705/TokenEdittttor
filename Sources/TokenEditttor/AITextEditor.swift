@@ -14,6 +14,14 @@ public struct AITextEditor: View {
     @Binding private var percentageRemaining: Double
     private var configuration: AIEditorConfiguration
     private var style: AITextEditorStyle
+    private var onMetricsChange: ((TokenMetrics) -> Void)?
+
+    @State private var metrics: TokenMetrics = .init(
+        wordCount: 0,
+        tokenCount: 0,
+        usage: .init(used: 0, maxTokens: 1)
+    )
+    @State private var countingTask: Task<Void, Never>?
 
     public init(
         _ text: Binding<String>,
@@ -24,6 +32,7 @@ public struct AITextEditor: View {
         self._percentageRemaining = percentageRemaining
         self.configuration = configuration
         self.style = .init()
+        self.onMetricsChange = nil
     }
 
     public var body: some View {
@@ -49,20 +58,23 @@ public struct AITextEditor: View {
             .clipShape(RoundedRectangle(cornerRadius: style.cornerRadius, style: .continuous))
 
             HStack {
+                if configuration.showsWordCountLabel {
+                    Text("Words: \(metrics.wordCount)")
+                        .font(.footnote.monospacedDigit())
+                        .foregroundStyle(.secondary)
+                }
                 Spacer()
                 TokenRingView(
-                    usage: TokenUsage(
-                        used: configuration.tokenizer.count(in: text),
-                        maxTokens: configuration.maxTokens
-                    ),
+                    usage: metrics.usage,
                     style: styleWithConfigurationValue
                 )
             }
         }
-        .onAppear(perform: updatePercentageBinding)
-        .onChange(of: text) { _, _ in updatePercentageBinding() }
-        .onChange(of: configuration.maxTokens) { _, _ in updatePercentageBinding() }
-        .onChange(of: configuration.tokenizer) { _, _ in updatePercentageBinding() }
+        .onAppear(perform: refreshMetrics)
+        .onChange(of: text) { _, _ in refreshMetrics() }
+        .onChange(of: configuration.maxTokens) { _, _ in refreshMetrics() }
+        .onChange(of: configuration.tokenizer) { _, _ in refreshMetrics() }
+        .onDisappear { countingTask?.cancel() }
     }
 
     public func bold(_ isBold: Bool = true) -> Self {
@@ -135,17 +147,81 @@ public struct AITextEditor: View {
         return copy
     }
 
+    public func showsWordCountLabel(_ visible: Bool) -> Self {
+        var copy = self
+        copy.configuration.showsWordCountLabel = visible
+        return copy
+    }
+
+    public func onMetricsChange(_ action: @escaping (TokenMetrics) -> Void) -> Self {
+        var copy = self
+        copy.onMetricsChange = action
+        return copy
+    }
+
     private var styleWithConfigurationValue: AITextEditorStyle {
         var updatedStyle = style
         updatedStyle.showTokenLabel = configuration.showsRemainingLabel && style.showTokenLabel
         return updatedStyle
     }
 
-    private func updatePercentageBinding() {
-        let usage = TokenUsage(
-            used: configuration.tokenizer.count(in: text),
-            maxTokens: configuration.maxTokens
-        )
-        percentageRemaining = usage.percentageRemainingClamped
+    private func refreshMetrics() {
+        let textSnapshot = text
+        let configurationSnapshot = configuration
+        countingTask?.cancel()
+        countingTask = Task(priority: .userInitiated) {
+            let updatedMetrics = await TokenMetrics.calculate(
+                text: textSnapshot,
+                maxTokens: configurationSnapshot.maxTokens,
+                tokenizer: configurationSnapshot.tokenizer
+            )
+            guard !Task.isCancelled else { return }
+            metrics = updatedMetrics
+            percentageRemaining = updatedMetrics.usage.percentageRemainingClamped
+            onMetricsChange?(updatedMetrics)
+        }
     }
 }
+
+#if DEBUG
+@MainActor
+private struct AITextEditorTypingPreview: View {
+    @State private var text: String = ""
+    @State private var percentageRemaining: Double = 1
+    @State private var tokenCount: Int = 0
+    @State private var wordCount: Int = 0
+    private let previewTokenizer: AITokenizer = .openAIEncoding(.cl100kBase)
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            ProgressView(value: percentageRemaining)
+                .tint(percentageRemaining > 0.15 ? .blue : .red)
+
+            Text("Number of tokens: \(tokenCount)")
+                .font(.footnote.monospacedDigit())
+                .foregroundStyle(.secondary)
+
+            Text("Number of words: \(wordCount)")
+                .font(.footnote.monospacedDigit())
+                .foregroundStyle(.secondary)
+
+            AITextEditor($text, $percentageRemaining)
+                .placeholder("Start typing...")
+                .maxTokens(80)
+                .tokenizer(previewTokenizer)
+                .showsWordCountLabel(true)
+                .backgroundColor(.blue.opacity(0.08), in: 14)
+                .onMetricsChange { metrics in
+                    tokenCount = metrics.tokenCount
+                    wordCount = metrics.wordCount
+                }
+        }
+        .padding()
+        .frame(maxWidth: 520)
+    }
+}
+
+#Preview("Typing Preview") {
+    AITextEditorTypingPreview()
+}
+#endif

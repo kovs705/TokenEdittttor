@@ -13,6 +13,9 @@ import UIKit
 public final class AITokenTextView: UIView, UITextViewDelegate {
     public var onTextChange: ((String) -> Void)?
     public var onPercentageRemainingChange: ((Double) -> Void)?
+    public var onTokenCountChange: ((Int) -> Void)?
+    public var onWordCountChange: ((Int) -> Void)?
+    public var onMetricsChange: ((TokenMetrics) -> Void)?
 
     public var text: String {
         get { textView.text ?? "" }
@@ -33,6 +36,7 @@ public final class AITokenTextView: UIView, UITextViewDelegate {
     private let remainingLabel = UILabel()
     private var ringWidthConstraint: NSLayoutConstraint?
     private var ringHeightConstraint: NSLayoutConstraint?
+    private var metricsTask: Task<Void, Never>?
 
     public init(
         configuration: AIEditorConfiguration = .init(),
@@ -54,6 +58,10 @@ public final class AITokenTextView: UIView, UITextViewDelegate {
     public override func layoutSubviews() {
         super.layoutSubviews()
         updateRingPath()
+    }
+
+    deinit {
+        metricsTask?.cancel()
     }
 
     @discardableResult
@@ -239,11 +247,22 @@ public final class AITokenTextView: UIView, UITextViewDelegate {
     }
 
     private func updateUsageState() {
-        let usage = TokenUsage(
-            used: configuration.tokenizer.count(in: text),
-            maxTokens: configuration.maxTokens
-        )
+        let textSnapshot = text
+        let configurationSnapshot = configuration
+        metricsTask?.cancel()
+        metricsTask = Task(priority: .userInitiated) { [weak self] in
+            let metrics = await TokenMetrics.calculate(
+                text: textSnapshot,
+                maxTokens: configurationSnapshot.maxTokens,
+                tokenizer: configurationSnapshot.tokenizer
+            )
+            guard !Task.isCancelled else { return }
+            self?.apply(metrics: metrics)
+        }
+    }
 
+    private func apply(metrics: TokenMetrics) {
+        let usage = metrics.usage
         ringProgressLayer.strokeEnd = usage.percentageRemainingClamped
         ringProgressLayer.strokeColor = (usage.isOverLimit ? style.ringOverLimitColor : style.ringProgressColor).cgColor
 
@@ -253,6 +272,9 @@ public final class AITokenTextView: UIView, UITextViewDelegate {
         remainingLabel.textColor = usage.isOverLimit ? style.ringOverLimitColor : .secondaryLabel
 
         onPercentageRemainingChange?(usage.percentageRemainingClamped)
+        onTokenCountChange?(metrics.tokenCount)
+        onWordCountChange?(metrics.wordCount)
+        onMetricsChange?(metrics)
     }
 }
 #endif

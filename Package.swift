@@ -23,9 +23,15 @@ let package = Package(
             targets: ["TokenEditttor"]
         )
     ],
+    dependencies: [
+        .package(path: "Vendor/Tiktoken")
+    ],
     targets: [
         .target(
             name: "TokenEditttor",
+            dependencies: [
+                .product(name: "Tiktoken", package: "Tiktoken")
+            ],
             swiftSettings: [
                 .enableExperimentalFeature("StrictConcurrency")
             ]
