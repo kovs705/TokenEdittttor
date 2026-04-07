@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="300" height="300" src="/Assets/TokenEdittttor.png" alt="">
+  <img width="300" height="300" src="/Assets/TokenEdittttor.png" alt="TokenEdittttor icon">
   <h1><b>TokenEdittttor</b></h1>
   <p>
     Library with a textfield for controling the amount of AI tokens left
